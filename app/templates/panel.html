@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0"><i class="bi bi-speedometer2 me-2 text-primary"></i>Panel Principal</h4>
+    <a href="/subir" class="btn btn-primary"><i class="bi bi-upload me-2"></i>Subir Documento</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <div class="text-primary mb-2"><i class="bi bi-files" style="font-size:2rem;"></i></div>
+            <h2 class="fw-bold">{{ total }}</h2>
+            <p class="text-muted mb-0">Total documentos</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <div class="text-success mb-2"><i class="bi bi-check-circle" style="font-size:2rem;"></i></div>
+            <h2 class="fw-bold text-success">{{ vigentes }}</h2>
+            <p class="text-muted mb-0">Vigentes</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <div class="text-danger mb-2"><i class="bi bi-slash-circle" style="font-size:2rem;"></i></div>
+            <h2 class="fw-bold text-danger">{{ revocados }}</h2>
+            <p class="text-muted mb-0">Revocados</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <div class="text-warning mb-2"><i class="bi bi-x-circle" style="font-size:2rem;"></i></div>
+            <h2 class="fw-bold text-warning">{{ cancelados }}</h2>
+            <p class="text-muted mb-0">Cancelados</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="fw-bold mb-3">Acciones rápidas</h5>
+        <a href="/subir" class="btn btn-primary me-2"><i class="bi bi-upload me-2"></i>Subir nuevo documento</a>
+        <a href="/repositorio" class="btn btn-success"><i class="bi bi-archive me-2"></i>Ver repositorio</a>
+    </div>
+</div>
+{% endblock %}

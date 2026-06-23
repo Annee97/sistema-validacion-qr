@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-body p-4">
+                <h4 class="fw-bold mb-4"><i class="bi bi-upload me-2 text-primary"></i>Subir Documento</h4>
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Archivo PDF</label>
+                        <input type="file" name="pdf" accept=".pdf" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Título del documento</label>
+                        <input type="text" name="titulo" class="form-control" placeholder="Ej: Contrato de servicios" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Tipo de documento</label>
+                        <input type="text" name="tipo" class="form-control" placeholder="Ej: Contrato, Oficio, Constancia" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Área emisora</label>
+                        <input type="text" name="area" class="form-control" placeholder="Ej: Recursos Humanos" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Posición del QR en el PDF</label>
+                        <select name="posicion" class="form-select">
+                            <option value="inferior_derecha">Inferior derecha</option>
+                            <option value="inferior_izquierda">Inferior izquierda</option>
+                            <option value="superior_derecha">Superior derecha</option>
+                            <option value="superior_izquierda">Superior izquierda</option>
+                            <option value="ultima_pagina">Última página inferior derecha</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+                        <i class="bi bi-qr-code me-2"></i>Generar QR y guardar documento
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

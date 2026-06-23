@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0"><i class="bi bi-archive me-2 text-primary"></i>Repositorio de Documentos</h4>
+    <a href="/subir" class="btn btn-primary"><i class="bi bi-upload me-2"></i>Subir nuevo</a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Folio</th>
+                        <th>Título</th>
+                        <th>Tipo</th>
+                        <th>Área</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in documentos %}
+                    <tr>
+                        <td><code>{{ doc.folio }}</code></td>
+                        <td>{{ doc.titulo }}</td>
+                        <td>{{ doc.tipo_documento }}</td>
+                        <td>{{ doc.area_emisora }}</td>
+                        <td>{{ doc.created_at.strftime('%d/%m/%Y') }}</td>
+                        <td>
+                            <span class="badge rounded-pill badge-{{ doc.estado }}">{{ doc.estado }}</span>
+                        </td>
+                        <td>
+                            <a href="/descargar/{{ doc.folio }}" class="btn btn-sm btn-primary me-1"
+                                title="Descargar con QR">
+                                <i class="bi bi-download"></i>
+                            </a>
+                            <a href="/descargar-original/{{ doc.folio }}" class="btn btn-sm btn-secondary me-1"
+                                title="Descargar original">
+                                <i class="bi bi-file-earmark-pdf"></i>
+                            </a>
+                            <a href="/validar/{{ doc.folio }}" target="_blank" class="btn btn-sm btn-success me-1">
+                                <i class="bi bi-qr-code-scan"></i>
+                            </a>
+                            {% if doc.estado == 'vigente' %}
+                            <form method="POST" action="/revocar/{{ doc.folio }}" style="display:inline;">
+                                <input type="hidden" name="estado" value="revocado">
+                                <button type="submit" class="btn btn-sm btn-danger me-1" title="Revocar">
+                                    <i class="bi bi-slash-circle"></i>
+                                </button>
+                            </form>
+                            <form method="POST" action="/revocar/{{ doc.folio }}" style="display:inline;">
+                                <input type="hidden" name="estado" value="cancelado">
+                                <button type="submit" class="btn btn-sm btn-warning" title="Cancelar">
+                                    <i class="bi bi-x-circle"></i>
+                                </button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% if not documentos %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-5">
+                            <i class="bi bi-inbox" style="font-size:2rem;"></i>
+                            <p class="mt-2">No hay documentos registrados</p>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

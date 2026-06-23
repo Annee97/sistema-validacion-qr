@@ -1,0 +1,26 @@
+services:
+  app:
+    build: ./app
+    ports:
+      - "8080:5000"
+    volumes:
+      - ./app:/app
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=secret123
+      - DB_NAME=sistema_qr
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.11
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret123
+      - MYSQL_DATABASE=sistema_qr
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
